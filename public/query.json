@@ -1,0 +1,23 @@
+{
+    "query" : {
+        "bool" : {
+            "must" : [
+                {
+                    "match" : {
+                        "keyword" : "miss"
+                    }
+                },
+                {
+                    "range" : {
+                        "view" : {
+                            "gte" : 30,
+                            "lte" : 100
+                        }
+                    }
+                }
+            ]
+        }
+
+
+    }
+}
