@@ -5,6 +5,8 @@ import TestPage from "./Pages/TestPage.vue"
 import FormSearch from "./Pages/FormSearch.vue"
 import vuetify from "./vuetify";
 import Post from "./Pages/Post.vue"
+import 'bootstrap/dist/css/bootstrap.css'
+
 
 
 const app = createApp({

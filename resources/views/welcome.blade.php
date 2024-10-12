@@ -19,7 +19,7 @@
     <body>
 
         <div id="app">
-            <div class="box">
+            <div class="box" style="position: relative">
                 <form-search> </form-search>
             </div>
 

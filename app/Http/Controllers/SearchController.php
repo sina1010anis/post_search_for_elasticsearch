@@ -13,24 +13,50 @@ class SearchController extends Controller
     public function searchPost(Request $request)
     {
 
-        // $param = '{"query" : {"match" : {"keyword" : "'.$request->search.'" }}';
-
-        $param = [
+        $query = [
             'query' => [
                 'match' => [
-                    'keyword' => $request->search
+                    'descrtion' => $request->search,
                 ]
             ],
             'highlight'=>[
                 "fields"=>[
-                    "keyword"=> new \stdClass()
+                    "descrtion"=> new \stdClass()
                 ],
                 'pre_tags' => "<i>",
                 'post_tags' => "</i>",
+            ],
+            'aggs' => [
+                'sum_views' => [
+                    "sum" => [
+                        'field' => "view"
+                    ]
+                ]
             ]
         ];
 
-        return json_decode(Elasticsearch::run('posts/_search', $param));
+        return json_decode(Elasticsearch::run('posts/_search', $query));
+
+    }
+
+    public function searchTitlePost(Request $request)
+    {
+
+        if ($request->search != null || $request->search != "") {
+            $query = [
+                'query' => [
+                    'match_phrase' => [
+                        'keyword' => [
+                            "query" => $request->search,
+                        ]
+                    ]
+                ]
+            ];
+
+            return json_decode(Elasticsearch::run('posts/_search', $query));
+        }
+
+
 
     }
 
